@@ -16,7 +16,7 @@ app.use('/api', UserRouter)
 const startApp = async () => {
     //db connection
     await mongoose.connect(DB_URL,
-        { useUnifiedTopology: true, useNewUrlParser: true }
+        { useUnifiedTopology: true, useNewUrlParser: true, autoIndex: true }
     )
         .then(() => console.log("Successfully connect to MongoDB."))
         .catch((err) => console.error("Connection error", err));

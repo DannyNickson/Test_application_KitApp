@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const User = new Schema({
-    email: { type: String,unique : true, dropDups: true},
+    email: { type: String,unique: true},
     reg_token: { type: String },
     photo_avatar: { type: String, default: "photo_uri" },
     phone: { type: String },
