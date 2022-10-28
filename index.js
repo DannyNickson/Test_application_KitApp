@@ -1,29 +1,30 @@
 import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
-import User from './schema/User.schema.js';
+import UserRouter from './Routers/UserRouter.js'
 
 dotenv.config();
-
 const PORT = process.env.PORT || 5000;
-const app = express();
 const DB_URL = process.env.DB_URL;
 
-app.use(express.json());
+const app = express();
 
-app.post('/',async (req,res)=>{
-    const {email, reg_token,photo_avatar,phone,name} = req.body;
-    const user = await User.create({email, reg_token,photo_avatar,phone,name})
-    res.status(200).json(user);
-})
+//Middleware
+app.use(express.json());
+app.use('/api', UserRouter)
 
 const startApp = async () => {
+    //db connection
+    await mongoose.connect(DB_URL,
+        { useUnifiedTopology: true, useNewUrlParser: true }
+    )
+        .then(() => console.log("Successfully connect to MongoDB."))
+        .catch((err) => console.error("Connection error", err));
     try {
-        await mongoose.connect(DB_URL, { useUnifiedTopology: true, useNewUrlParser: true })
         app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
     } catch (error) {
         console.log(error);
     }
 }
 
-startApp()
+startApp() 
