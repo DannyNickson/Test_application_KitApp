@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const Doctor = new Schema({
-    email: { type: String },
+    email: { type: String,unique : true, dropDups: true},
     reg_token: { type: String },
     photo_avatar: { type: String, default: "photo_uri" },
     phone: { type: String },
