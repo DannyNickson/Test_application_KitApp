@@ -1,12 +1,12 @@
 import Router from 'express';
-
+import AppointmentController from '../Controllers/AppointmentController.js';
 const router = new Router();
 
-router.post('/appointments');
-router.get('/appointments');
-router.get('/appointments/:id');
-router.put('/appointments');
-router.delete('/appointments/:id');
+router.post('/',AppointmentController.create);
+router.get('/',AppointmentController.getAll);
+router.get('/:id',AppointmentController.getOne);
+router.put('/makeactive/:id',AppointmentController.setActive);
+router.delete('/:id',AppointmentController.deleteOne);
 
 
 export default router;

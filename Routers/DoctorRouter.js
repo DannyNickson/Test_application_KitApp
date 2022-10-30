@@ -1,12 +1,13 @@
 import Router from 'express';
 import DoctorController from '../Controllers/DoctorController.js';
+import appointmentAceptanceMiddleware from '../middleware/appointmentAceptanceMiddleware.js';
 const router = new Router();
 
-router.post('/doctors',DoctorController.create);
-router.get('/doctors');
-router.get('/doctors/:id');
-router.put('/doctors');
-router.delete('/doctors/:id');
+router.post('/',DoctorController.create);
+router.get('/',DoctorController.getAll);
+router.get('/:id',DoctorController.getOne);
+router.put('/');
+router.delete('/:id');
 
 
 export default router;

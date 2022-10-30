@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
-import UserRouter from './Routers/UserRouter.js'
+import router from './routers/index.js'
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -11,7 +11,7 @@ const app = express();
 
 //Middleware
 app.use(express.json());
-app.use('/api', UserRouter)
+app.use('/api', router)
 
 const startApp = async () => {
     //db connection
