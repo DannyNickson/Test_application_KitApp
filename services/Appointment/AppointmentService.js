@@ -1,15 +1,15 @@
+import { now } from 'mongoose';
 import Appointment from '../../schemas/Appointment.schema.js';
-import User from '../../schemas/User.schema.js'
-import Doctor from '../../schemas/Doctor.schema.js'
 import DoctorService from '../Doctor/DoctorService.js';
+import UserService from '../User/UserService.js';
+import fs from 'fs';
 class AppointmentService {
     async create(appointment) {
-        const createdAppointment = await Appointment.create(appointment);
-        const changedUser = await User.findById( appointment.user );
-        if (!changedUser) {
-            throw (`No user with id:${appointment.user}`)
+        if(appointment.date)
+        {
+            appointment.date = new Date(appointment.date);
         }
-        await User.findByIdAndUpdate(appointment.user).set('appointments', [...changedUser.appointments, createdAppointment.id])
+        const createdAppointment = await Appointment.create(appointment);
         return createdAppointment;
     }
     async getAll() {
@@ -22,22 +22,39 @@ class AppointmentService {
     }
     async setActive(id) {
         if (!id) {
-            throw new Error("No id. ID requered");
+            throw ("No id. ID requered");
         }
         const appointment = await this.getOne(id);
         if (!appointment) {
-            throw new Error(`No user with id:${id}`)
+            throw (`No user with id:${id}`)
         }
         const doctorAccepted = await DoctorService.getOne(appointment.doctor);
         if (!doctorAccepted) {
-            throw new Error(`No docotor with id:${appointment.doctor}`)
+            throw (`No docotor with id:${appointment.doctor}`)
         }
         if(!doctorAccepted.free)
         {
             throw ("Error Doctor has 3 appointment");
         }
         await DoctorService.setAppointmentsAccepted(appointment.doctor, id)
+        await UserService.updateAppointment(appointment.user,id);
         return await Appointment.findByIdAndUpdate(id).set("active", true);
+    }
+    async deleteOne(id)
+    {
+        const appointment = await this.getOne(id);
+        await DoctorService.deleteAppointment(appointment.doctor,id);
+        await UserService.deleteAppointment(appointment.user,id);
+        return await Appointment.findByIdAndDelete(id);
+    }
+    async getAllByDoctorId(docotrID)
+    {
+        const appointments= await Appointment.find({doctor:docotrID,active:false});
+        return appointments;
+    }
+    async getAllAcceptedActive(){
+        const appointment = await Appointment.find({active:true});
+        return appointment;
     }
 }
 

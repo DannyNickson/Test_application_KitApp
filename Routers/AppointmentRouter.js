@@ -7,6 +7,7 @@ router.get('/',AppointmentController.getAll);
 router.get('/:id',AppointmentController.getOne);
 router.put('/makeactive/:id',AppointmentController.setActive);
 router.delete('/:id',AppointmentController.deleteOne);
+router.get('/fordoctor/:id',AppointmentController.getAllByDoctorId);
 
 
 export default router;

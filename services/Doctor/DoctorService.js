@@ -37,6 +37,11 @@ class DoctorService {
         }
         
     }
+    async deleteAppointment(docotrID,appointmentID)
+    {
+        let newAppointmentAccepted = await this.getOne(docotrID).appointments_accepted;
+        await Doctor.findByIdAndUpdate(docotrID).set('appointments_accepted',newAppointmentAccepted.splice(newAppointmentAccepted.indexOf(appointmentID),1));
+    }
 }
 
 export default new DoctorService();
