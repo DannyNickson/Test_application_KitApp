@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import router from './routers/index.js'
 import nodeCron from 'node-cron';
 import cronFunction from './cron/cronCheckAppointment.js'
-import fs from 'fs';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
