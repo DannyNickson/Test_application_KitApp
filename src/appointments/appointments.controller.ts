@@ -34,6 +34,7 @@ export class AppointmentsController {
   }
 
   @ApiOperation({ summary: 'Apply appointment' })
+  @ApiParam({name:"id",example:"6364463c91433123601f956f"})
   @Put('apply/:id')
   @ApiResponse({ status: 200,type: Appointment })
   async applyAppointment(
@@ -43,6 +44,7 @@ export class AppointmentsController {
   }
 
   @ApiOperation({ summary: 'Discard Appointment' })
+  @ApiParam({name:"id",example:"6364463c91433123601f956f"})
   @ApiResponse({ status: 200, type: Appointment })
   @Put('discard/:id')
   async discardAppointment(
