@@ -69,7 +69,7 @@ export class Doctor {
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }],
   })
-  appointments_accepted: Appointment[];
+  appointments_accepted: mongoose.Schema.Types.ObjectId[];
 }
 
 export const DoctorModel = SchemaFactory.createForClass(Doctor);

@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { DoctorsModule } from './doctors/doctors.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { CronModule } from './cron/cron.module';
 
 @Module({
   controllers: [],
@@ -22,6 +23,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     UsersModule,
     DoctorsModule,
     AppointmentsModule,
+    CronModule,
   ],
 })
 export class AppModule {}
