@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-// import { Doctor } from 'src/doctors/doctors.model';
 import { Doctor } from '../doctors/doctors.model';
 import { User } from '../users/users.model';
 import { ApiProperty } from '@nestjs/swagger';
@@ -9,6 +8,9 @@ export type AppointmentDocument = Appointment & Document;
 
 @Schema()
 export class Appointment {
+
+  _id:string
+
   @ApiProperty({
     example: '2022-11-04T15:30:00.003Z',
     description: 'Appointment date',
