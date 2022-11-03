@@ -17,6 +17,10 @@ export class AppointmentsController {
     getAll():Promise<Appointment[]> {
       return this.appointmentsService.findAllAppointment();
     }
+    @Get("active")
+    getAllActive():Promise<Appointment[]> {
+      return this.appointmentsService.findAllActiveAppointments();
+    }
     @Put("apply/:id")
     async applyAppointment(@Param("id") appointmentID:Appointment):Promise<Appointment>{
         const appointment = await this.appointmentsService.getOneAppointment(appointmentID);

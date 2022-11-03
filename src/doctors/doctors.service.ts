@@ -18,6 +18,9 @@ export class DoctorsService {
   async findAllDoctor(): Promise<Doctor[]> {
     return this.doctorModel.find().exec();
   }
+  async findOneDoctor(doctorID:Doctor): Promise<Doctor> {
+    return this.doctorModel.findById(doctorID).exec();
+  }
   async addNewAppointment(appointmentID:Appointment,doctorID:Doctor):Promise<Doctor>{
     const findedDoctor = await this.doctorModel.findById(doctorID).exec();
     const appointmentArray:Appointment[] = findedDoctor.appointments_accepted;

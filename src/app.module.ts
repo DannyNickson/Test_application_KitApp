@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { DoctorsModule } from './doctors/doctors.module';
 import { AppointmentsModule } from './appointments/appointments.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   controllers: [],
@@ -17,9 +18,10 @@ import { AppointmentsModule } from './appointments/appointments.module';
       useNewUrlParser: true,
       autoIndex: true,
     }),
+    ScheduleModule.forRoot(),
     UsersModule,
     DoctorsModule,
-    AppointmentsModule,
+    AppointmentsModule
   ],
 })
 export class AppModule {}

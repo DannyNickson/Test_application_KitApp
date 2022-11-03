@@ -16,6 +16,9 @@ export class UsersService {
   async findAllUsers(): Promise<User[]> {
     return this.userModel.find().exec();
   }
+  async findOneUser(userID:User): Promise<User> {
+    return this.userModel.findById(userID).exec();
+  }
   async addActiveAppointment(appointmentID:Appointment,userID:User):Promise<User>{
     const findedUser = await this.userModel.findById(userID).exec();
     if(findedUser.appointments.indexOf(appointmentID) === -1)

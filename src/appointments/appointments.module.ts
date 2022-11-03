@@ -9,11 +9,12 @@ import { DoctorsModule } from './../doctors/doctors.module';
   providers: [AppointmentsService],
   controllers: [AppointmentsController],
   imports: [
-MongooseModule.forFeature([
+    MongooseModule.forFeature([
       { name: Appointment.name, schema: AppointmentModel },
     ]),
     UsersModule,
-    DoctorsModule
+    DoctorsModule,
   ],
+  exports: [AppointmentsModule],
 })
 export class AppointmentsModule {}
