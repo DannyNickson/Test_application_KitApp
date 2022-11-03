@@ -21,7 +21,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(),
     UsersModule,
     DoctorsModule,
-    AppointmentsModule
+    AppointmentsModule,
   ],
 })
 export class AppModule {}

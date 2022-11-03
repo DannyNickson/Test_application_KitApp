@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { Doctor } from 'src/doctors/doctors.model';
-import { User } from 'src/users/users.model';
+// import { Doctor } from 'src/doctors/doctors.model';
+import { Doctor } from '../doctors/doctors.model';
+import { User } from '../users/users.model';
 import { ApiProperty } from '@nestjs/swagger';
 
 export type AppointmentDocument = Appointment & Document;
