@@ -14,4 +14,27 @@ export class AppointmentsService {
     async findAllAppointment():Promise<Appointment[]>{
         return this.appointmentModel.find().exec();
     }
+    async getOneAppointment(appointmentID:Appointment):Promise<Appointment>{
+        return this.appointmentModel.findById(appointmentID).exec();
+    }
+    
+    async setActive(appointmentID:Appointment):Promise<Appointment>{
+        const nonActiveAppointment = await this.appointmentModel.findById(appointmentID).exec();
+        if(nonActiveAppointment.active == false)
+        {
+            nonActiveAppointment.$set("active",'true');
+        }
+        return nonActiveAppointment.save();
+    }
+    async removeAppointment(appointmentID:Appointment):Promise<Appointment>{
+        return await this.appointmentModel.findByIdAndRemove(appointmentID).exec();
+    }
+    async setInActive(appointmentID:Appointment):Promise<Appointment>{
+        const nonActiveAppointment = await this.appointmentModel.findById(appointmentID).exec();
+        if(nonActiveAppointment.active == true)
+        {
+            nonActiveAppointment.$set("active",'false');
+        }
+        return nonActiveAppointment.save();
+    }
 }

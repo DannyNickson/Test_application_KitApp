@@ -13,7 +13,7 @@ export class Appointment {
   user: User;
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctor' }] })
   doctor: Doctor;
-  @Prop({ default: true })
+  @Prop({ default: false })
   active: boolean;
 }
 
